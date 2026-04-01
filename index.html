@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annie的个人博客</title>
+    <!-- Tailwind CSS CDN（单文件即可使用现代化样式） -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        :root {
+            --primary-color: #ff4081;
+        }
+        
+        * {
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+        }
+        
+        .blog-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .markdown-content p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .dark {
+            --primary-color: #60a5fa;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+    <!-- 导航栏 -->
+    <nav class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-blue-500 text-white rounded-2xl flex items-center justify-center text-2xl font-bold">Annie</div>
+                <h1 class="text-2xl font-bold tracking-tight">  的博客</h2>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#home" onclick="navigateToSection('home')" class="hover:text-blue-500 transition-colors">首页</a>
+                <a href="#blog" onclick="navigateToSection('blog')" class="hover:text-blue-500 transition-colors">我的性格详情</a>
+                <a href="#about" onclick="navigateToSection('about')" class="hover:text-blue-500 transition-colors">关于我</a>
+                <a href="#contact" onclick="navigateToSection('contact')" class="hover:text-blue-500 transition-colors">联系</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <!-- 暗黑模式切换 -->
+                <button onclick="toggleDarkMode()" 
+                        class="w-10 h-10 flex items-center justify-center rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <span id="theme-icon" class="text-xl">🌙</span>
+                </button>
+                
+                <!-- 移动端菜单按钮 -->
+                <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 flex items-center justify-center rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <span id="mobile-menu-icon" class="text-2xl">☰</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t px-6 py-4">
+            <div class="flex flex-col gap-4 text-sm font-medium">
+                <a href="#home" onclick="navigateToSection('home');toggleMobileMenu()" class="py-2">首页</a>
+                <a href="#blog" onclick="navigateToSection('blog');toggleMobileMenu()" class="py-2">性格页面</a>
+                <a href="#about" onclick="navigateToSection('about');toggleMobileMenu()" class="py-2">关于我</a>
+                <a href="#contact" onclick="navigateToSection('contact');toggleMobileMenu()" class="py-2">联系</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页 Hero 区域 -->
+    <section id="home" class="max-w-6xl mx-auto px-6 pt-20 pb-16">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-3xl text-sm font-medium mb-6">
+                    👋 欢迎你
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+                    你好，我是 <span class="text-blue-500">Annie</span><br>
+                    这是个人介绍的页面
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-md">
+                    还未完全制作完成 下次一定<br>
+                    这是我的详情页
+                </p>
+                <div class="flex items-center gap-4">
+                    <a href="#blog" onclick="navigateToSection('blog')"
+                       class="px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-3xl font-medium flex items-center gap-2 transition-all">
+                        我的性格详情
+                        <span class="text-xl">→</span>
+                    </a>
+                    <a href="#about" onclick="navigateToSection('about')"
+                       class="px-8 py-4 border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-3xl font-medium transition-all">
+                        了解我更多
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 头像占位 -->
+            <div class="relative">
+                <div class="<img src="https://153485619232768.abvod.cn/Test/a431708338e2faef4f17c36e82d590bb.jpg" class="w-full h-full object-cover">
+                    <div class="w-full h-full bg-[radial-gradient(at_center,#ffffff20_0%,transparent_70%)] flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-8xl mb-4"><img src="https://153485619232768.abvod.cn/Test/a431708338e2faef4f17c36e82d590bb.jpg" class="w-full h-full object-cover"></div>
+                            <p class="text-white text-xl font-medium"></p>
+                            <p class="text-white/70 text-sm mt-1"></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 装饰小元素 -->
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 文章列表 -->
+    <section id="blog" class="max-w-6xl mx-auto px-6 py-16 bg-white dark:bg-gray-900">
+        <div class="flex justify-between items-baseline mb-12">
+            <h2 class="text-4xl font-bold">我的性格详情</h2>
+            <a href="#" onclick="alert('在实际项目中这里可以跳转到归档页')" 
+               class="text-blue-500 hover:underline flex items-center gap-1 text-sm font-medium">
+                查看全部 <span class="text-lg">→</span>
+            </a>
+        </div>
+        
+        <div id="posts-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- 文章卡片将由 JavaScript 动态生成 -->
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about" class="max-w-6xl mx-auto px-6 py-16">
+        <div class="grid md:grid-cols-12 gap-12">
+            <div class="md:col-span-5">
+                <h2 class="text-4xl font-bold mb-8">关于我</h2>
+                <div class="prose dark:prose-invert text-lg">
+                    <p id="about-text">我是Annie（代名）我喜欢你找聊天、诉苦、打游戏~我很反感已读不回、冷暴力等行为 </p>
+                    <p>这个博客是我的性格相信页面，欢迎你在这里了解我~</p>
+                </div>
+                
+                <div class="mt-10 flex flex-wrap gap-6">
+                    <div class="flex items-center gap-3">
+                        <div class="text-3xl">💻</div>
+                        <div>
+                            <div class="font-medium">下次一定写</div>
+                            <div class="text-sm text-gray-500">下次一定写</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-3xl">📖</div>
+                        <div>
+                            <div class="font-medium">下次一定写</div>
+                            <div class="text-sm text-gray-500">下次一定写</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-3xl">✈️</div>
+                        <div>
+                            <div class="font-medium">下次一定写</div>
+                            <div class="text-sm text-gray-500">下次一定写</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:col-span-7 bg-gray-100 dark:bg-gray-800 rounded-3xl p-8 md:p-12">
+                <h3 class="text-2xl font-semibold mb-6">我的小故事</h3>
+                <div id="story-text" class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                    下次一定写
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="bg-gray-900 text-white py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">保持联系</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-xl mx-auto">
+                <div onclick="copyToClipboard('anniedv106@gmail.com')" 
+                     class="bg-white/10 hover:bg-white/20 rounded-3xl p-8 text-center cursor-pointer transition-all">
+                    <div class="text-5xl mb-4">✉️</div>
+                    <div class="font-medium text-xl">邮箱</div>
+                    <div id="email-display" class="text-blue-300 mt-2">anniedv106@gmail.com</div>
+                    <div class="text-xs text-gray-400 mt-1">点击复制</div>
+                </div>
+                
+                <div onclick="copyToClipboard('sossi')" 
+                     class="bg-white/10 hover:bg-white/20 rounded-3xl p-8 text-center cursor-pointer transition-all">
+                    <div class="text-8xl mb-4"><img src="https://153485619232768.abvod.cn/Test/a431708338e2faef4f17c36e82d590bb.jpg" class="w-full h-full object-cover"></div>
+                    <div class="font-medium text-xl">微信</div>
+                    <div class="text-blue-300 mt-2">sossil</div>
+                    <div class="text-xs text-gray-400 mt-1">点击复制</div>
+                </div>
+                
+                <div onclick="copyToClipboard('3810710631')" 
+                     class="bg-white/10 hover:bg-white/20 rounded-3xl p-8 text-center cursor-pointer transition-all">
+                    <div class="text-5xl mb-4">图标懒</div>
+                    <div class="font-medium text-xl">QQ</div>
+                    <div class="text-blue-300 mt-2">3810710631</div>
+                    <div class="text-xs text-gray-400 mt-1">点击复制</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-950 text-gray-400 py-12">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="mb-4">© 2026 Annie的个人博客 • 由你自己维护 ❤️</p>
+            <div class="flex justify-center gap-6 text-sm">
+                <a href="#" class="hover:text-white">RSS 订阅</a>
+                <a href="#" class="hover:text-white">隐私政策</a>
+                <a href="#" class="hover:text-white">关于本站</a>
+            </div>
+            <p class="text-xs mt-8 opacity-60">使用 Tailwind CSS 单文件模板 </p>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind 脚本初始化
+        function initializeTailwind() {
+            tailwind.config = {
+                content: [],
+                theme: {
+                    extend: {}
+                }
+            }
+        }
+        
+        // 示例文章数据（你可以在这里轻松修改）
+        let posts = [
+            {
+                id: 1,
+                title: "关于网络上",
+                excerpt: "我是一个敏感的人，比较反感敷衍、冷暴力等行为",
+                date: "2026-03-15",
+                readTime: "",
+                category: "性格特点",
+                imageEmoji: "🚀"
+            },
+            {
+                id: 2,
+                title: "现实中",
+                excerpt: "内向、不愿说话的人",
+                date: "2026年3月29日",
+                readTime: "",
+                category: "性格特点",
+                imageEmoji: "📸"
+            },
+            {
+                id: 3,
+                title: "什么时候有域名？",
+                excerpt: "再等我研究研究吧！",
+                date: "2026年3月29日",
+                readTime: "",
+                category: "读书",
+                imageEmoji: "📖"
+            }
+        ]
+        
+        // 渲染文章卡片
+        function renderPosts() {
+            const container = document.getElementById('posts-container')
+            container.innerHTML = ''
+            
+            posts.forEach(post => {
+                const card = document.createElement('div')
+                card.className = 'blog-card bg-white dark:bg-gray-800 rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-700'
+                card.innerHTML = `
+                    <div class="h-48 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center text-8xl">
+                        ${post.imageEmoji}
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between text-xs mb-3">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-3xl">${post.category}</span>
+                            <span class="text-gray-400">${post.date}</span>
+                        </div>
+                        <h3 class="font-semibold text-xl leading-tight mb-3 line-clamp-2">${post.title}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3">${post.excerpt}</p>
+                        
+                        <div class="mt-6 flex items-center justify-between text-sm">
+                            <span class="flex items-center gap-1 text-gray-400">
+                                 ${post.readTime}
+                            </span>
+                            <button onclick="readPost(${post.id})" 
+                                    class="text-blue-500 hover:text-blue-600 font-medium flex items-center gap-1">
+                                阅读全文 →
+                            </button>
+                        </div>
+                    </div>
+                `
+                container.appendChild(card)
+            })
+            
+            // 如果没有文章，显示提示
+            if (posts.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-3 text-center py-20 text-gray-400">
+                        <p class="text-2xl">📭</p>
+                        <p>还没有文章哦～</p>
+                    </div>
+                `
+            }
+        }
+        
+        // 点击阅读全文（示例：弹出模态框展示模拟文章内容）
+        function readPost(id) {
+            const post = posts.find(p => p.id === id)
+            if (!post) return
+            
+            const modalHTML = `
+            <div onclick="if(event.target.id==='modal-backdrop')closeModal()" 
+                 id="modal-backdrop"
+                 class="fixed inset-0 bg-black/60 flex items-center justify-center z-[9999]">
+                <div onclick="event.stopImmediatePropagation()" 
+                     class="bg-white dark:bg-gray-900 max-w-2xl w-full mx-4 rounded-3xl overflow-hidden max-h-[90vh] overflow-y-auto">
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-8">
+                            <div>
+                                <span class="px-4 py-1.5 text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 rounded-3xl">${post.category}</span>
+                                <h1 class="text-3xl font-bold mt-4 leading-tight">${post.title}</h1>
+                                <p class="text-gray-400 mt-2">${post.date} · ${post.readTime}</p>
+                            </div>
+                            <button onclick="closeModal()" class="text-4xl text-gray-300 hover:text-gray-500">×</button>
+                        </div>
+                        
+                        <div class="markdown-content text-lg leading-relaxed">
+                            <p>${post.excerpt}</p>
+                            <p></p>
+                            <h2>更多细节</h2>
+                            <p></p>
+                            <p>暂无</p>
+                        </div>
+                        
+                        <div class="mt-12 flex gap-4">
+                            <button onclick="closeModal()" 
+                                    class="flex-1 py-4 border border-gray-300 dark:border-gray-600 rounded-3xl">关闭</button>
+                            <button onclick="closeModal()" 
+                                    class="flex-1 py-4 bg-blue-500 text-white rounded-3xl">分享给朋友</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+            
+            const modalContainer = document.createElement('div')
+            modalContainer.innerHTML = modalHTML
+            document.body.appendChild(modalContainer)
+        }
+        
+        function closeModal() {
+            const modals = document.querySelectorAll('#modal-backdrop')
+            modals.forEach(m => m.remove())
+        }
+        
+        // 暗黑模式切换
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark')
+            const icon = document.getElementById('theme-icon')
+            icon.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙'
+            // 可选：保存到 localStorage
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'))
+        }
+        
+        // 移动端菜单
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu')
+            const icon = document.getElementById('mobile-menu-icon')
+            menu.classList.toggle('hidden')
+            icon.textContent = menu.classList.contains('hidden') ? '☰' : '✕'
+        }
+        
+        // 平滑滚动导航
+        function navigateToSection(section) {
+            document.getElementById(section).scrollIntoView({
+                behavior: 'smooth'
+            })
+        }
+        
+        // 复制到剪贴板
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ 已复制到剪贴板：' + text)
+            })
+        }
+        
+        // 初始化函数
+        function init() {
+            initializeTailwind()
+            renderPosts()
+            
+            // 读取上次暗黑模式设置
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.documentElement.classList.add('dark')
+                document.getElementById('theme-icon').textContent = '☀️'
+            }
+            
+            console.log('%c🎉 Annie的个人博客前端已初始化完成！', 'color:#3b82f6;font-size:13px;font-weight:bold')
+        }
+        
+        // 页面加载完成后执行
+        window.onload = init
+    </script>
+</body>
+</html>
