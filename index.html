@@ -224,7 +224,7 @@
                 <a href="#" class="hover:text-white">隐私政策</a>
                 <a href="#" class="hover:text-white">关于本站</a>
             </div>
-            <p class="text-xs mt-8 opacity-60">使用 Tailwind CSS 单文件模板 版本0.1.4</p>
+            <p class="text-xs mt-8 opacity-60">使用 Tailwind CSS 单文件模板 版本0.1.5</p>
         </div>
     </footer>
 
@@ -240,35 +240,54 @@
         }
         
         // 示例文章数据（你可以在这里轻松修改）
-        let posts = [
-            {
-                id: 1,
-                title: "关于网络上",
-                excerpt: "我是一个敏感的人，比较反感敷衍、冷暴力等行为",
-                date: "2026年4月1日",
-                readTime: "",
-                category: "性格特点",
-                imageEmoji: "🚀"
-            },
-            {
-                id: 2,
-                title: "现实中",
-                excerpt: "内向、不愿说话的人",
-                date: "2026年3月29日",
-                readTime: "",
-                category: "性格特点",
-                imageEmoji: "📸"
-            },
-            {
-                id: 3,
-                title: "什么时候有域名？",
-                excerpt: "下次一定 先用GitHub的吧",
-                date: "2026年4月1日",
-                readTime: "",
-                category: "读书",
-                imageEmoji: "📖"
-            }
-        ]
+let posts = [
+    {
+        id: 1,
+        title: "关于网络上",
+        excerpt: "敏感，比反感敷衍、冷暴力",
+        date: "2026年4月1日",
+        //readTime: "10 分钟",
+        category: "性格特点",
+        imageEmoji: "🌆"
+    },
+    {
+        id: 2,
+        title: "现实中",
+        excerpt: "现实会遇到吗？",
+        date: "2026年3月29日",
+        //readTime: "5 分钟",
+        category: "性格特点",
+        imageEmoji: "📸"
+    },
+    {
+        id: 3,
+        title: "什么时候有域名？",
+        excerpt: "下次一定 先用GitHub的吧",
+        date: "2026年4月1日",
+        //readTime: "12 分钟",
+        category: "其它",
+        imageEmoji: "GitHub"
+    },
+    {
+        id: 4,
+        title: "测试新文章",
+        excerpt: "测试新文章",
+        date: "2026年4月3日",
+        //readTime: "8 分钟",
+        category: "测试新文章",
+        imageEmoji: "测试新文章"
+    },
+    {
+        id: 5,
+        title: "测试新文章",
+        excerpt: "测试新文章",
+        date: "2026年4月3日",
+        //readTime: "6 分钟",
+        category: "测试新文章",
+        imageEmoji: "测试新文章"
+    }
+    // 如果还要加更多，继续复制上面的 { ... } 结构，注意每条之间要有英文逗号 ,
+]
         
         // 渲染文章卡片
         function renderPosts() {
