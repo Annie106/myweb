@@ -12,13 +12,6 @@
         
         * { font-family: 'Noto Sans SC', system-ui, sans-serif; }
 
-        .hero-bg {
-            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
-        }
-        .dark .hero-bg {
-            background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
-        }
-
         .blog-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -27,27 +20,11 @@
             transform: translateY(-8px);
             box-shadow: 0 20px 40px -15px rgb(0 0 0 / 0.1);
         }
-
-        .nav-link {
-            position: relative;
-        }
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(to right, #3b82f6, #8b5cf6);
-            transition: all 0.4s ease;
-            transform: translateX(-50%);
-        }
-        .nav-link:hover:after { width: 100%; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 overflow-x-hidden">   <!-- 默认白色背景 -->
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
 
-    <!-- 导航栏 -->
+    <!-- 导航栏（删除黑暗模式切换按钮） -->
     <nav class="sticky top-0 z-50 bg-white border-b border-gray-200">
         <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -56,16 +33,13 @@
             </div>
             
             <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="#home" onclick="navigateToSection('home')" class="nav-link hover:text-blue-600 transition-colors">首页</a>
-                <a href="#blog" onclick="navigateToSection('blog')" class="nav-link hover:text-blue-600 transition-colors">我的性格</a>
-                <a href="#about" onclick="navigateToSection('about')" class="nav-link hover:text-blue-600 transition-colors">关于我</a>
-                <a href="#contact" onclick="navigateToSection('contact')" class="nav-link hover:text-blue-600 transition-colors">联系我</a>
+                <a href="#home" onclick="navigateToSection('home')" class="hover:text-blue-600 transition-colors">首页</a>
+                <a href="#blog" onclick="navigateToSection('blog')" class="hover:text-blue-600 transition-colors">我的性格</a>
+                <a href="#about" onclick="navigateToSection('about')" class="hover:text-blue-600 transition-colors">关于我</a>
+                <a href="#contact" onclick="navigateToSection('contact')" class="hover:text-blue-600 transition-colors">联系我</a>
             </div>
             
             <div class="flex items-center gap-4">
-                <button onclick="toggleDarkMode()" class="w-10 h-10 flex items-center justify-center rounded-2xl hover:bg-gray-100 transition-colors">
-                    <span id="theme-icon" class="text-xl">🌙</span>
-                </button>
                 <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 flex items-center justify-center rounded-2xl hover:bg-gray-100 text-2xl">
                     <span id="mobile-menu-icon">☰</span>
                 </button>
@@ -82,39 +56,37 @@
         </div>
     </nav>
 
-    <!-- Hero 区域（白色模式适配） -->
-    <section id="home" class="hero-bg text-gray-900 max-w-6xl mx-auto px-6 pt-20 pb-20">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div class="space-y-8">
-                <div class="inline-flex items-center gap-2 px-5 py-2 bg-white/80 backdrop-blur-md border border-gray-200 rounded-3xl text-sm font-medium">
+    <!-- Hero 区域 -->
+    <section id="home" class="max-w-6xl mx-auto px-6 pt-20 pb-16">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-3xl text-sm font-medium mb-6">
                     欢迎你
                 </div>
-                <h1 class="text-5xl md:text-6xl font-bold leading-none tracking-tighter">
-                    你好，我是 <span class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Annie</span>
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+                    你好，我是 <span class="text-blue-600">Annie</span>
                 </h1>
-                <p class="text-xl text-gray-600 max-w-md leading-relaxed">
+                <p class="text-xl text-gray-600 max-w-md mb-8">
                     敏感、真实、讨厌冷暴力与敷衍<br>
                     这里是我分享性格、想法和生活的地方<br>
                     beta版本的博客 有类似需求可以联系我
                 </p>
-                <div class="flex flex-wrap gap-4 pt-6">
+                <div class="flex items-center gap-4">
                     <a href="#blog" onclick="navigateToSection('blog')" 
-                       class="px-9 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-3xl font-semibold flex items-center gap-3 hover:scale-105 transition-all shadow-xl">
+                       class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-3xl font-medium flex items-center gap-2 transition-all">
                         查看我的性格详情
-                        <span class="text-xl">↓</span>
+                        <span class="text-xl">→</span>
                     </a>
                     <a href="#about" onclick="navigateToSection('about')" 
-                       class="px-9 py-4 border border-gray-300 hover:bg-gray-50 rounded-3xl font-medium transition-all">
+                       class="px-8 py-4 border border-gray-300 hover:bg-gray-50 rounded-3xl font-medium transition-all">
                         关于我
                     </a>
                 </div>
             </div>
-
-            <div class="relative flex justify-center">
-                <div class="relative">
-                    <div class="w-80 h-80 md:w-96 md:h-96 rounded-[2.75rem] overflow-hidden shadow-2xl ring-8 ring-white">
-                        <img src="./images/avatar.jpg" alt="Annie的头像" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
-                    </div>
+            
+            <div class="relative">
+                <div class="aspect-square w-full max-w-[380px] mx-auto rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100">
+                    <img src="./images/avatar.jpg" alt="Annie的头像" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -129,10 +101,10 @@
     </section>
 
     <!-- 关于我 -->
-    <section id="about" class="max-w-6xl mx-auto px-6 py-20 bg-gray-50">
-        <div class="grid md:grid-cols-12 gap-16 items-center">
+    <section id="about" class="max-w-6xl mx-auto px-6 py-16 bg-gray-50">
+        <div class="grid md:grid-cols-12 gap-12">
             <div class="md:col-span-5">
-                <h2 class="text-4xl font-bold mb-6">关于我</h2>
+                <h2 class="text-4xl font-bold mb-8">关于我</h2>
                 <div class="space-y-6 text-lg text-gray-700">
                     <p>我是Annie（代名）可以找我聊天、诉苦、打游戏~</p>
                     <p>我很反感已读不回、冷暴力等行为</p>
@@ -142,7 +114,7 @@
             
             <div class="md:col-span-7 bg-white rounded-3xl p-10 shadow-sm">
                 <h3 class="text-2xl font-semibold mb-8">我的小故事</h3>
-                <div class="prose leading-relaxed text-gray-600">
+                <div class="text-lg leading-relaxed text-gray-600">
                     <p>暂无</p>
                     <p>beta测试 行数2</p>
                 </div>
@@ -191,17 +163,13 @@
                 <a href="#" class="hover:text-gray-900">隐私政策</a>
                 <a href="#" class="hover:text-gray-900">关于本站</a>
             </div>
-            <p class="text-xs mt-8 opacity-60">使用 Tailwind CSS 单文件模板 版本0.5.9 beta1</p>
+            <p class="text-xs mt-8 opacity-60">使用 Tailwind CSS 单文件模板 版本0.5.10 beta2</p>
         </div>
     </footer>
 
     <script>
         function initializeTailwind() {
-            tailwind.config = { 
-                darkMode: 'class', 
-                content: [], 
-                theme: { extend: {} } 
-            };
+            tailwind.config = { content: [], theme: { extend: {} } };
         }
 
         let posts = [
@@ -228,39 +196,35 @@
                 date: "2026年4月1日",
                 category: "其它",
                 coverImage: "./images/02.jpg"
-            },
-            {
-                id: 4,
-                title: "测试",
-                excerpt: "测试",
-                date: "2026年4月19日",
-                category: "测试",
-                imageEmoji: "测试"
             }
         ];
 
         function renderPosts() {
             const container = document.getElementById('posts-container');
-            if (!container) return;
-            
             container.innerHTML = '';
-
+            
             posts.forEach(post => {
                 const card = document.createElement('div');
                 card.className = 'blog-card bg-white rounded-3xl overflow-hidden border border-gray-100';
+                
+                // 使用真实图片（如果有coverImage就显示图片，否则显示emoji）
+                const coverHTML = post.coverImage 
+                    ? `<img src="${post.coverImage}" alt="${post.title}" class="w-full h-48 object-cover">`
+                    : `<div class="h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center text-8xl">
+                        ${post.imageEmoji || '📝'}
+                       </div>`;
+                
                 card.innerHTML = `
-                    <div class="h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center text-8xl">
-                        ${post.imageEmoji}
-                    </div>
-                    <div class="p-7">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="px-4 py-1 text-xs bg-blue-100 text-blue-600 rounded-3xl">${post.category}</span>
-                            <span class="text-sm text-gray-400">${post.date}</span>
+                    ${coverHTML}
+                    <div class="p-6">
+                        <div class="flex items-center justify-between text-xs mb-3">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-3xl">${post.category}</span>
+                            <span class="text-gray-400">${post.date}</span>
                         </div>
                         <h3 class="font-semibold text-xl leading-tight mb-3">${post.title}</h3>
                         <p class="text-gray-600 text-sm leading-relaxed">${post.excerpt}</p>
-                        <div class="mt-6 flex justify-between items-center text-sm">
-                            <span class="flex items-center gap-1 text-gray-400"> ${post.readTime || ''}</span>
+                        <div class="mt-6 flex items-center justify-between text-sm">
+                            <span class="flex items-center gap-1 text-gray-400">⏱</span>
                             <button onclick="readPost(${post.id})" class="text-blue-600 font-medium flex items-center gap-1">
                                 阅读全文 →
                             </button>
@@ -295,6 +259,7 @@
                         </div>
                         <div class="mt-12 flex gap-4">
                             <button onclick="closeModal()" class="flex-1 py-4 border border-gray-300 rounded-3xl font-medium">关闭</button>
+                            <button onclick="closeModal()" class="flex-1 py-4 bg-blue-500 text-white rounded-3xl font-medium">分享给朋友</button>
                         </div>
                     </div>
                 </div>
@@ -307,13 +272,6 @@
 
         function closeModal() {
             document.querySelectorAll('#modal-backdrop').forEach(m => m.remove());
-        }
-
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
-            const isDark = document.documentElement.classList.contains('dark');
-            document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
-            localStorage.setItem('darkMode', isDark);
         }
 
         function toggleMobileMenu() {
@@ -336,8 +294,6 @@
         function init() {
             initializeTailwind();
             renderPosts();
-            
-            // 默认白色模式
             console.log('%cAnnie的博客已加载完成 ✨', 'color:#3b82f6; font-weight:bold');
         }
 
