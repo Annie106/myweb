@@ -207,12 +207,7 @@
                 const card = document.createElement('div');
                 card.className = 'blog-card bg-white rounded-3xl overflow-hidden border border-gray-100';
                 
-                // 使用真实图片（如果有coverImage就显示图片，否则显示emoji）
-                const coverHTML = post.coverImage 
-                    ? `<img src="${post.coverImage}" alt="${post.title}" class="w-full h-48 object-cover">`
-                    : `<div class="h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center text-8xl">
-                        ${post.imageEmoji || '📝'}
-                       </div>`;
+
                 
                 card.innerHTML = `
                     ${coverHTML}
@@ -224,7 +219,7 @@
                         <h3 class="font-semibold text-xl leading-tight mb-3">${post.title}</h3>
                         <p class="text-gray-600 text-sm leading-relaxed">${post.excerpt}</p>
                         <div class="mt-6 flex items-center justify-between text-sm">
-                            <span class="flex items-center gap-1 text-gray-400">⏱</span>
+                            <span class="flex items-center gap-1 text-gray-400"></span>
                             <button onclick="readPost(${post.id})" class="text-blue-600 font-medium flex items-center gap-1">
                                 阅读全文 →
                             </button>
@@ -259,7 +254,6 @@
                         </div>
                         <div class="mt-12 flex gap-4">
                             <button onclick="closeModal()" class="flex-1 py-4 border border-gray-300 rounded-3xl font-medium">关闭</button>
-                            <button onclick="closeModal()" class="flex-1 py-4 bg-blue-500 text-white rounded-3xl font-medium">分享给朋友</button>
                         </div>
                     </div>
                 </div>
