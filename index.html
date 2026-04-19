@@ -167,131 +167,142 @@
         </div>
     </footer>
 
-    <script>
-        function initializeTailwind() {
-            tailwind.config = { content: [], theme: { extend: {} } };
+<script>
+    function initializeTailwind() {
+        tailwind.config = { 
+            content: [], 
+            theme: { extend: {} } 
+        };
+    }
+
+    let posts = [
+        {
+            id: 1,
+            title: "关于网络上",
+            excerpt: "敏感，比反感敷衍、冷暴力",
+            date: "2026年4月1日",
+            category: "性格特点",
+            imageEmoji: "🌆",
+
+        },
+        {
+            id: 2,
+            title: "现实中",
+            excerpt: "现实会遇到吗？",
+            date: "2026年3月29日",
+            category: "性格特点",
+            imageEmoji: "📸",
+
+        },
+        {
+            id: 3,
+            title: "什么时候有域名？",
+            excerpt: "下次一定 先用GitHub Pages的吧",
+            date: "2026年4月1日",
+            category: "其它",
+            imageEmoji: "GitHub",
+            coverImage: "./images/post3.jpg"
         }
+    ];
 
-        let posts = [
-            {
-                id: 1,
-                title: "关于网络上",
-                excerpt: "敏感，比反感敷衍、冷暴力",
-                date: "2026年4月1日",
-                category: "性格特点",
-                imageEmoji: "🌆"
-            },
-            {
-                id: 2,
-                title: "现实中",
-                excerpt: "现实会遇到吗？",
-                date: "2026年3月29日",
-                category: "性格特点",
-                imageEmoji: "📸"
-            },
-            {
-                id: 3,
-                title: "什么时候有域名？",
-                excerpt: "下次一定 先用GitHub Pages的吧",
-                date: "2026年4月1日",
-                category: "其它",
-                coverImage: "./images/02.jpg"
-            }
-        ];
+    function renderPosts() {
+        const container = document.getElementById('posts-container');
+        if (!container) return;
+        
+        container.innerHTML = '';
 
-        function renderPosts() {
-            const container = document.getElementById('posts-container');
-            container.innerHTML = '';
-            
-            posts.forEach(post => {
-                const card = document.createElement('div');
-                card.className = 'blog-card bg-white rounded-3xl overflow-hidden border border-gray-100';
-                
+        posts.forEach(post => {
+            const card = document.createElement('div');
+            card.className = 'blog-card bg-white rounded-3xl overflow-hidden border border-gray-100';
 
-                
-                card.innerHTML = `
-                    ${coverHTML}
-                    <div class="p-6">
-                        <div class="flex items-center justify-between text-xs mb-3">
-                            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-3xl">${post.category}</span>
-                            <span class="text-gray-400">${post.date}</span>
-                        </div>
-                        <h3 class="font-semibold text-xl leading-tight mb-3">${post.title}</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">${post.excerpt}</p>
-                        <div class="mt-6 flex items-center justify-between text-sm">
-                            <span class="flex items-center gap-1 text-gray-400"></span>
-                            <button onclick="readPost(${post.id})" class="text-blue-600 font-medium flex items-center gap-1">
-                                阅读全文 →
-                            </button>
-                        </div>
+            // 关键修复：正确处理图片或 emoji
+            const coverHTML = post.coverImage 
+                ? `<img src="${post.coverImage}" alt="${post.title}" class="w-full h-48 object-cover">`
+                : `<div class="h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center text-8xl">
+                    ${post.imageEmoji || '📝'}
+                   </div>`;
+
+            card.innerHTML = `
+                ${coverHTML}
+                <div class="p-6">
+                    <div class="flex items-center justify-between text-xs mb-3">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-3xl">${post.category}</span>
+                        <span class="text-gray-400">${post.date}</span>
                     </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function readPost(id) {
-            const post = posts.find(p => p.id === id);
-            if (!post) return;
-
-            const modalHTML = `
-            <div onclick="if(event.target.id==='modal-backdrop')closeModal()" id="modal-backdrop"
-                 class="fixed inset-0 bg-black/70 flex items-center justify-center z-[9999]">
-                <div onclick="event.stopImmediatePropagation()" 
-                     class="bg-white max-w-2xl w-full mx-4 rounded-3xl overflow-hidden max-h-[90vh] overflow-y-auto">
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-8">
-                            <div>
-                                <span class="px-4 py-1.5 text-xs bg-blue-100 text-blue-600 rounded-3xl">${post.category}</span>
-                                <h1 class="text-3xl font-bold mt-4 leading-tight">${post.title}</h1>
-                                <p class="text-gray-400 mt-2">${post.date}</p>
-                            </div>
-                            <button onclick="closeModal()" class="text-4xl text-gray-300 hover:text-gray-500">×</button>
-                        </div>
-                        <div class="markdown-content text-lg leading-relaxed">
-                            <p>${post.excerpt}</p>
-                            <p class="mt-8">更多内容正在完善中...</p>
-                        </div>
-                        <div class="mt-12 flex gap-4">
-                            <button onclick="closeModal()" class="flex-1 py-4 border border-gray-300 rounded-3xl font-medium">关闭</button>
-                        </div>
+                    <h3 class="font-semibold text-xl leading-tight mb-3">${post.title}</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">${post.excerpt}</p>
+                    <div class="mt-6 flex items-center justify-between text-sm">
+                        <span class="flex items-center gap-1 text-gray-400">⏱</span>
+                        <button onclick="readPost(${post.id})" class="text-blue-600 font-medium flex items-center gap-1">
+                            阅读全文 →
+                        </button>
                     </div>
                 </div>
-            </div>`;
+            `;
+            container.appendChild(card);
+        });
+    }
 
-            const modalContainer = document.createElement('div');
-            modalContainer.innerHTML = modalHTML;
-            document.body.appendChild(modalContainer);
-        }
+    function readPost(id) {
+        const post = posts.find(p => p.id === id);
+        if (!post) return;
 
-        function closeModal() {
-            document.querySelectorAll('#modal-backdrop').forEach(m => m.remove());
-        }
+        const modalHTML = `
+        <div onclick="if(event.target.id==='modal-backdrop')closeModal()" id="modal-backdrop"
+             class="fixed inset-0 bg-black/70 flex items-center justify-center z-[9999]">
+            <div onclick="event.stopImmediatePropagation()" 
+                 class="bg-white max-w-2xl w-full mx-4 rounded-3xl overflow-hidden max-h-[90vh] overflow-y-auto">
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-8">
+                        <div>
+                            <span class="px-4 py-1.5 text-xs bg-blue-100 text-blue-600 rounded-3xl">${post.category}</span>
+                            <h1 class="text-3xl font-bold mt-4 leading-tight">${post.title}</h1>
+                            <p class="text-gray-400 mt-2">${post.date}</p>
+                        </div>
+                        <button onclick="closeModal()" class="text-4xl text-gray-300 hover:text-gray-500">×</button>
+                    </div>
+                    <div class="markdown-content text-lg leading-relaxed">
+                        <p>${post.excerpt}</p>
+                        <p class="mt-8">更多内容正在完善中...</p>
+                    </div>
+                    <div class="mt-12 flex gap-4">
+                        <button onclick="closeModal()" class="flex-1 py-4 border border-gray-300 rounded-3xl font-medium">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('mobile-menu-icon');
-            menu.classList.toggle('hidden');
-            icon.textContent = menu.classList.contains('hidden') ? '☰' : '✕';
-        }
+        const modalContainer = document.createElement('div');
+        modalContainer.innerHTML = modalHTML;
+        document.body.appendChild(modalContainer);
+    }
 
-        function navigateToSection(section) {
-            document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
-        }
+    function closeModal() {
+        document.querySelectorAll('#modal-backdrop').forEach(m => m.remove());
+    }
 
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('✅ 已复制到剪贴板：' + text);
-            });
-        }
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('mobile-menu-icon');
+        menu.classList.toggle('hidden');
+        icon.textContent = menu.classList.contains('hidden') ? '☰' : '✕';
+    }
 
-        function init() {
-            initializeTailwind();
-            renderPosts();
-            console.log('%cAnnie的博客已加载完成 ✨', 'color:#3b82f6; font-weight:bold');
-        }
+    function navigateToSection(section) {
+        document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
+    }
 
-        window.onload = init;
-    </script>
-</body>
-</html>
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('✅ 已复制到剪贴板：' + text);
+        });
+    }
+
+    function init() {
+        initializeTailwind();
+        renderPosts();
+        console.log('%cAnnie的博客已加载完成 ✨', 'color:#3b82f6; font-weight:bold');
+    }
+
+    window.onload = init;
+</script>
